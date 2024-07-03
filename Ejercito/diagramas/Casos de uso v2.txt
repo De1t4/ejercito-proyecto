@@ -1,0 +1,52 @@
+@startuml
+skin rose
+skinparam linetype ortho
+
+abstract class Persona {
+}
+
+class Soldado {
+}
+
+class SubOficial {
+
+}
+
+class Oficial {
+
+}
+
+class SistemaEjercito {
+}
+
+SistemaEjercito --- "*" Persona: personas
+SistemaEjercito --- "*" Cuartel: cuarteles
+SistemaEjercito --- "*" Cuerpo: cuerpos
+SistemaEjercito --- "*" Compañia: compañias
+
+class Servicio {
+
+}
+
+class Cuerpo {
+
+}
+
+class Cuartel {
+
+}
+
+class Compañia{
+
+}
+
+
+Soldado  o--- "*" Servicio: servicios
+Persona <|--- Soldado
+Persona <|--- SubOficial
+Soldado *--- "1" Cuartel: cuarteles
+Soldado  *--- "1" Compañia: compañias
+Soldado  *--- "1" Cuerpo: cuerpos
+SubOficial <|-- Oficial
+@enduml
+

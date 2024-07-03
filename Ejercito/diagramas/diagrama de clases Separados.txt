@@ -1,0 +1,76 @@
+@startuml
+skin rose
+skinparam linetype ortho
+
+abstract class Persona {
+  -usuario: String
+  -password: String
+  -nombre: String
+  -apellido: String
+  +proceder(SistemaEjercito sistemaEjercito)
+  +mostrar()
+  +mostrarMenu()
+  +buscarUsuario(String datos):boolean
+  +verInformacion()
+}
+
+
+class Soldado {
+  -codigo: String
+  -fechaGraduacion: String
+}
+
+class SubOficial {
+  +crearSoldado(SistemaEjercito sistemaEjercito)
+  +crearServicio(SistemaEjercito sistemaEjercito)
+}
+
+class Oficial {
+  +crearCompañia(SistemaEjercito sistemaEjercito)
+  +crearCuartel(SistemaEjercito sistemaEjercito)
+  +crearCuerpo(SistemaEjercito sistemaEjercito)
+  +crearSubOficial(SistemaEjercito sistemaEjercito)
+}
+
+class SistemaEjercito {
+  +buscar()
+  +mostrar()
++verificarSoldados():boolean
++verificarEstructuras():boolean
++agregarSoldado(Soldado nuevoSoldado)
++mostrarInformacionPersonas(ArrayList<? extends Persona> personas, String nombreObjeto)
++mostrarInformacionEstructura(ArrayList<? extends EstructuraMilitar> estructuras, String nombreObjeto)
+}
+
+
+class Servicio {
+  -codigo: String
+  -descripcion: String
+  -finalizacion: LocalDate
+}
+
+class Cuerpo {
+  -codigo: String
+  -denominacion: String
+}
+
+class Cuartel {
+  -codigo: String
+  -nombre: String
+  -ubicacion: String
+}
+
+class Compañia{
+  -numero: String
+  -actividad: String
+}
+
+
+interface EstructuraMilitar {
+  +mostrarInformacion()
+  +coincideCodigo(String codigo)
+}
+
+
+
+@enduml
