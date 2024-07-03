@@ -44,9 +44,9 @@ class Compañia{
 Soldado  o--- "*" Servicio: servicios
 Persona <|--- Soldado
 Persona <|--- SubOficial
-Soldado *--- "1" Cuartel: cuarteles
-Soldado  *--- "1" Compañia: compañias
-Soldado  *--- "1" Cuerpo: cuerpos
+Soldado *--- "1" Cuartel: cuartel
+Soldado  *--- "1" Compañia: compañia
+Soldado  *--- "1" Cuerpo: cuerpo
 SubOficial <|-- Oficial
 @enduml
 
