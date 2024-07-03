@@ -1,16 +1,17 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/**
+ * Clase que representa a un oficial en el sistema del ejército. Hereda de la
+ * clase SubOficial.
  */
 package ejercito;
 
 import java.util.ArrayList;
 
-/**
- * Clase que representa a un oficial en el sistema del ejército. Hereda de la
- * clase SubOficial.
- */
 public class Oficial extends SubOficial {
+
+    Validacion v = new Validacion();
 
     public Oficial(String u, String p) {
         super(u, p);
@@ -77,35 +78,6 @@ public class Oficial extends SubOficial {
     }
 
     /**
-     * Crea un nuevo cuerpo de ejercito en el sistema del ejército.
-     *
-     * @param sistemaEjercito Instancia del sistema del ejército, para ser
-     * almacenado en el sistema.
-     */
-    public void crearCuerpo(SistemaEjercito sistemaEjercito) {
-        String codigo = EntradaSalida.leerString("Ingresar codigo del cuerpo");
-
-        String denominacion = EntradaSalida.leerString("Ingresar denominacion del cuerpo");
-
-        ArrayList<Cuerpo> ListaCuerpos = sistemaEjercito.getCuerpos();
-        ArrayList<String> ListadoCodigos = new ArrayList<>();
-        for (int i = 0; i < ListaCuerpos.size(); i++) {
-            ListadoCodigos.add(ListaCuerpos.get(i).getCodigo());
-        }
-
-        if (ListadoCodigos.contains(codigo)) {
-            EntradaSalida.advertenciaMensaje("El codigo ingresado ya existe");
-            return;
-        }
-
-        EntradaSalida.destacarMensaje("El cuerpo del ejercito fue creado");
-
-        Cuerpo cuerpo = new Cuerpo(codigo, denominacion);
-
-        sistemaEjercito.getCuerpos().add(cuerpo);
-    }
-
-    /**
      * Crea un nuevo suboficial en el sistema del ejército.
      *
      * @param sistemaEjercito Instancia del sistema del ejército, para ser
@@ -136,6 +108,35 @@ public class Oficial extends SubOficial {
     }
 
     /**
+     * Crea un nuevo cuerpo de ejercito en el sistema del ejército.
+     *
+     * @param sistemaEjercito Instancia del sistema del ejército, para ser
+     * almacenado en el sistema.
+     */
+    public void crearCuerpo(SistemaEjercito sistemaEjercito) {
+        String codigo = EntradaSalida.leerString("Ingresar codigo del cuerpo");
+
+        String denominacion = EntradaSalida.leerString("Ingresar denominacion del cuerpo");
+
+        ArrayList<Cuerpo> ListaCuerpos = sistemaEjercito.getCuerpos();
+        ArrayList<String> ListadoCodigos = new ArrayList<>();
+        for (int i = 0; i < ListaCuerpos.size(); i++) {
+            ListadoCodigos.add(ListaCuerpos.get(i).getCodigo());
+        }
+
+        if (ListadoCodigos.contains(codigo)) {
+            EntradaSalida.advertenciaMensaje("El codigo ingresado ya existe");
+            return;
+        }
+
+        EntradaSalida.destacarMensaje("El cuerpo del ejercito fue creado");
+
+        Cuerpo cuerpo = new Cuerpo(codigo, denominacion);
+
+        sistemaEjercito.getCuerpos().add(cuerpo);
+    }
+
+    /**
      * Crea una nueva compañía en el sistema del ejército.
      *
      * @param sistemaEjercito Instancia del sistema del ejército, para ser
@@ -145,7 +146,7 @@ public class Oficial extends SubOficial {
         String actividad = EntradaSalida.leerString("Ingresar actividad de compañía");
 
         ArrayList<String> codigosExistentes = new ArrayList<>();
-        for (Compania compania : sistemaEjercito.getCompanias()) {
+        for (Compania compania : sistemaEjercito.getCompañias()) {
             codigosExistentes.add(compania.getCodigo());
         }
 
@@ -153,7 +154,8 @@ public class Oficial extends SubOficial {
 
         Compania compañia = new Compania(codigo, actividad);
 
-        sistemaEjercito.getCompanias().add(compañia);
+        EntradaSalida.destacarMensaje("La compañia fue creada");
+        sistemaEjercito.getCompañias().add(compañia);
     }
 
     /**
@@ -231,15 +233,16 @@ public class Oficial extends SubOficial {
      * Método para ver información específica de las personas como soldados y
      * suboficiales y para ver las diferentes estructuras que forman parte del
      * sistema como cuerteles, compañias y cuerpos.
+     *
      * @param sistemaEjercito Instancia del sistema del ejército.
      */
     @Override
     public void verInfomacion(SistemaEjercito sistemaEjercito) {
         EntradaSalida.mostrarString("");
         sistemaEjercito.mostrarInformacionPersonas(sistemaEjercito.getSoldados(), "Soldado");
-        sistemaEjercito.mostrarInformacionPersonas(sistemaEjercito.getSuboficiales(), "SubOfical");
+        sistemaEjercito.mostrarInformacionPersonas(sistemaEjercito.getSuboficiales(), "SubOficial");
         sistemaEjercito.mostrarInformacionEstructura(sistemaEjercito.getCuarteles(), "Cuartel");
-        sistemaEjercito.mostrarInformacionEstructura(sistemaEjercito.getCompanias(), "Companias");
+        sistemaEjercito.mostrarInformacionEstructura(sistemaEjercito.getCompañias(), "Companias");
         sistemaEjercito.mostrarInformacionEstructura(sistemaEjercito.getCuerpos(), "Cuerpo");
         EntradaSalida.mostrarString("");
     }

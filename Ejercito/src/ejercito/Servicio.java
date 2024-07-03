@@ -23,7 +23,6 @@ public class Servicio implements Serializable, EstructuraMilitar {
         this.codigo = codigo;
         this.descripcion = descripcion;
     }
-
     /**
      * Muestra la información del servicio en la salida estándar.
      */

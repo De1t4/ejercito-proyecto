@@ -16,7 +16,7 @@ public class Control {
      * datos de inicio de sesión si no encuentra el archivo.
      * Guarda los cambios en el archivo "ejercito.txt" al finalizar cada sesión.
      */
-    public void ejecutar() {
+    public  void ejecutar() {
         SistemaEjercito sistemaEjercito = new SistemaEjercito();
         GestorArchivos gestorArchivos = new GestorArchivos();
         

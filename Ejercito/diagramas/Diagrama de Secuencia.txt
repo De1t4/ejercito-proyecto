@@ -1,0 +1,83 @@
+@startuml
+actor Oficial as OF
+participant "SistemaEjercito" as SE
+participant "EntradaSalida" as ES
+participant "Soldado" as SD
+
+OF -> SE: validarEstructura()
+alt validarEstructura() V/F
+    SE -> ES: advertenciaMensaje()
+    return
+end
+
+OF -> ES: leerString("Ingresar nombre")
+ES --> OF: nombre
+
+OF -> ES: leerString("Ingresar apellido")
+ES --> OF: apellido
+
+OF --> ES: leerString("Ingresar nombre de usuario")
+ES --> OF: usuario
+
+OF -> ES: leerString("Ingresar contraseña")
+ES --> OF: password
+
+OF -> ES: leerString("Ingresar fecha de graduacion (YYYY-MM-DD)")
+ES --> OF: graduacion
+
+OF -> ES: leerString("Ingresar codigo del soldado")
+ES --> OF: codigo
+
+OF -> SE: buscarPersona(usuario, password)
+SE --> OF: personaExistente
+alt personaExistente != null
+    SE -> ES: advertenciaMensaje()
+    return
+end
+
+OF -> SE: buscarSoldado(codigo)
+SE --> OF: soldadoExistente
+alt soldadoExistente != null
+    SE -> ES: advertenciaMensaje()
+    return
+end
+
+OF -> SE: mostrarInformacionEstructura(Compañias)
+OF -> ES: leerString("Ingresar el codigo de una compania")
+ES --> OF: codigoCompañia
+
+OF -> SE: buscarCompañia(codigoCompañia)
+SE --> OF: compañia
+alt compañia == null
+    SE -> ES: advertenciaMensaje()
+    return
+end
+
+OF -> SE: mostrarInformacionEstructura(Cuartel)
+OF -> ES: leerString("Ingresar el codigo de algun cuartel")
+ES --> OF: codigoCuartel
+
+OF -> SE: buscarCuartel(codigoCuartel)
+SE --> OF: cuartel
+alt cuartel == null
+    SE -> ES: advertenciaMensaje()
+    return
+end
+
+OF -> SE: mostrarInformacionEstructura(Cuerpo)
+OF -> ES: leerString("Ingresar el codigo de un cuerpo")
+ES --> OF: codigoCuerpo
+
+OF -> SE: buscarCuerpo(codigoCuerpo)
+SE --> OF: cuerpo
+alt cuerpo == null
+    SE -> ES: advertenciaMensaje()
+    return
+end
+
+OF -> SD: new Soldado()
+
+OF -> SE: agregarSoldado(Soldado)
+
+SE -> ES: destacarMensaje("Se ha creado un nuevo Soldado")
+@enduml

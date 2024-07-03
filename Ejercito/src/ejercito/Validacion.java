@@ -45,4 +45,6 @@ public class Validacion<T> implements Serializable {
     public boolean validarContenido(ArrayList<String> array, String validar) {
         return array.contains(validar);
     }
+
+
 }

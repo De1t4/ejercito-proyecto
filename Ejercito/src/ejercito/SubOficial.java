@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ejercito;
 
 public class SubOficial extends Persona {
@@ -70,7 +67,8 @@ public class SubOficial extends Persona {
      * @param sistemaEjercito El sistema del ejército.
      */
     public void crearServicio(SistemaEjercito sistemaEjercito) {
-        if (!sistemaEjercito.validarSoldados()) {
+        char opc;
+        if (!sistemaEjercito.verificarSoldados()) {
             EntradaSalida.advertenciaMensaje("No existen soldados, crea uno!");
             return;
         }
@@ -79,24 +77,29 @@ public class SubOficial extends Persona {
 
         sistemaEjercito.mostrarInformacionPersonas(sistemaEjercito.getSoldados(), "Soldado");
 
-        String codigoSoldado = EntradaSalida.leerString("Ingresar codigo del soldado");
-        Soldado soldado = sistemaEjercito.buscarSoldado(codigoSoldado);
+        do {
+            String codigoSoldado = EntradaSalida.leerString("Ingresar codigo del soldado");
+            Soldado soldado = sistemaEjercito.buscarSoldado(codigoSoldado);
 
-        if (soldado == null) {
-            EntradaSalida.advertenciaMensaje("El soldado ingresado no fue encontrado");
-            return;
-        }
-
-        if (!soldado.verificarServicios()) {
-            if (v.validarContenido(soldado.obtenerListaCodigos(), codigo)) {
-                EntradaSalida.advertenciaMensaje("El codigo del servicios, ya esta registrado en el soldado");
+            if (soldado == null) {
+                EntradaSalida.advertenciaMensaje("El soldado ingresado no fue encontrado");
                 return;
             }
-        }
 
-        EntradaSalida.destacarMensaje("El soldado fue encontrado, y se le asigno el servicio");
-        Servicio servicio = new Servicio(codigo, descripcion);
-        soldado.agregarServicio(servicio);
+            if (!soldado.verificarServicios()) {
+                if (v.validarContenido(soldado.obtenerListaCodigos(), codigo)) {
+                    EntradaSalida.advertenciaMensaje("Ese servicio, ya esta asignado en el soldado");
+                    return;
+                }
+            }
+
+            EntradaSalida.destacarMensaje("El soldado fue encontrado, y se le asigno el servicio");
+            Servicio servicio = new Servicio(codigo, descripcion);
+            soldado.agregarServicio(servicio);
+
+            opc = EntradaSalida.leerChar("Presione S para continuar, en caso contrario cualquier tecla");
+        } while (opc == 's' || opc == 'S' );
+
     }
 
     /**
@@ -105,7 +108,7 @@ public class SubOficial extends Persona {
      * @param sistemaEjercito El sistema del ejército.
      */
     public void crearSoldado(SistemaEjercito sistemaEjercito) {
-        if (!sistemaEjercito.validarEstructura()) {
+        if (!sistemaEjercito.verificarEstructuras()) {
             return;
         }
 
@@ -113,8 +116,8 @@ public class SubOficial extends Persona {
         String apellido = EntradaSalida.leerString("Apellido de Soldado");
         String usuario = EntradaSalida.leerString("Ingresar nombre de usuario");
         String password = EntradaSalida.leerString("Ingresar contraseña");
-        String codigo = EntradaSalida.leerString("Ingresar codigo de soldado");
         String graduacion = EntradaSalida.leerString("Ingresar fecha de graduacion (YYYY-MM-DD)");
+        String codigo = EntradaSalida.leerString("Ingresar codigo del soldado");
 
         if (sistemaEjercito.buscarPersona(usuario + ":" + password) != null) {
             EntradaSalida.advertenciaMensaje("El usuario ya está en el sistema");
@@ -127,7 +130,7 @@ public class SubOficial extends Persona {
         }
 
         System.out.println("");
-        sistemaEjercito.mostrarInformacionEstructura(sistemaEjercito.getCompanias(), "Compania");
+        sistemaEjercito.mostrarInformacionEstructura(sistemaEjercito.getCompañias(), "Compania");
         System.out.println("");
 
         String codigoCompañia = EntradaSalida.leerString("Ingresar el codigo de una compania");
@@ -186,7 +189,7 @@ public class SubOficial extends Persona {
         EntradaSalida.mostrarString("");
         sistemaEjercito.mostrarInformacionPersonas(sistemaEjercito.getSoldados(), "Soldado");
         sistemaEjercito.mostrarInformacionEstructura(sistemaEjercito.getCuarteles(), "Cuartel");
-        sistemaEjercito.mostrarInformacionEstructura(sistemaEjercito.getCompanias(), "Companias");
+        sistemaEjercito.mostrarInformacionEstructura(sistemaEjercito.getCompañias(), "Companias");
         sistemaEjercito.mostrarInformacionEstructura(sistemaEjercito.getCuerpos(), "Cuerpo");
         EntradaSalida.mostrarString("");
     }

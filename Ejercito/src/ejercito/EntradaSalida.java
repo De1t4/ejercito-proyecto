@@ -68,10 +68,13 @@ public class EntradaSalida {
 
     /**
      * Muestra un mensaje de advertencia en la salida estándar.
+     *
      * @param texto Mensaje de advertencia.
      */
     public static void advertenciaMensaje(String texto) {
         System.out.println(" ");
         System.err.println(texto);
+        System.out.println(" ");
+
     }
 }
